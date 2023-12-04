@@ -178,7 +178,7 @@ function ProductInfo({ page, layout }: Props) {
               : name}
           </span>
         </h1>
-        <div style="text-decoration: underline; margin-top: 20px">
+        <div style="margin-top: 20px">
           <span
             style={stock && stock <= 10 ? "color: orange" : "color: current"}
           >
