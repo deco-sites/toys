@@ -71,8 +71,94 @@ function ProductInfo({ page, layout }: Props) {
     listPrice,
   });
 
+  let stock;
+
+  if (product) {
+    if (product.offers) {
+      stock = product.offers.offers[0].inventoryLevel.value;
+    }
+  }
+
   return (
     <div class="flex flex-col" id={id}>
+      <div style="background: #a79d9d; width: 100%; height: 80px; position: fixed; left: 0;top: 85px;z-index:9">
+        <div style="display: grid;grid-template-columns: repeat(9, 1fr);grid-template-rows: auto;align-items: center;height: 100%;">
+          <div style="grid-column: 3/5;">
+            <h1>
+              <span class="font-medium text-xl capitalize" style="color:#fff">
+                {layout?.name === "concat"
+                  ? `${isVariantOf?.name} ${name}`
+                  : layout?.name === "productGroup"
+                  ? isVariantOf?.name
+                  : name}
+              </span>
+            </h1>
+          </div>
+          <div style="grid-column: 6; display:flex;flex-direction: column;">
+            <span class="font-medium text-xl text-secondary" style="color:#fff">
+              Por: {formatPrice(price, offers?.priceCurrency)}
+            </span>
+            <span class="text-sm text-base-300" style="color:#fff">
+              ou {installments}
+            </span>
+          </div>
+          <div style="grid-column:8/9;" class="mt-0 flex flex-col gap-4">
+            {availability === "https://schema.org/InStock"
+              ? (
+                <>
+                  {platform === "vtex" && (
+                    <>
+                      <AddToCartButtonVTEX
+                        eventParams={{ items: [eventItem] }}
+                        productID={productID}
+                        seller={seller}
+                      />
+                      <WishlistButton
+                        variant="full"
+                        productID={productID}
+                        productGroupID={productGroupID}
+                      />
+                    </>
+                  )}
+                  {platform === "wake" && (
+                    <AddToCartButtonWake
+                      eventParams={{ items: [eventItem] }}
+                      productID={productID}
+                    />
+                  )}
+                  {platform === "linx" && (
+                    <AddToCartButtonLinx
+                      eventParams={{ items: [eventItem] }}
+                      productID={productID}
+                      productGroupID={productGroupID}
+                    />
+                  )}
+                  {platform === "vnda" && (
+                    <AddToCartButtonVNDA
+                      eventParams={{ items: [eventItem] }}
+                      productID={productID}
+                      additionalProperty={additionalProperty}
+                    />
+                  )}
+                  {platform === "shopify" && (
+                    <AddToCartButtonShopify
+                      eventParams={{ items: [eventItem] }}
+                      productID={productID}
+                    />
+                  )}
+                  {platform === "nuvemshop" && (
+                    <AddToCartButtonNuvemshop
+                      productGroupID={productGroupID}
+                      eventParams={{ items: [eventItem] }}
+                      additionalProperty={additionalProperty}
+                    />
+                  )}
+                </>
+              )
+              : <OutOfStock productID={productID} />}
+          </div>
+        </div>
+      </div>
       <Breadcrumb itemListElement={breadcrumb.itemListElement} />
       {/* Code and name */}
       <div class="mt-4 sm:mt-8">
@@ -92,6 +178,15 @@ function ProductInfo({ page, layout }: Props) {
               : name}
           </span>
         </h1>
+        <div style="text-decoration: underline; margin-top: 20px">
+          <span
+            style={stock && stock <= 10 ? "color: orange" : "color: current"}
+          >
+            {stock && stock <= 10
+              ? `Apenas ${stock} em estoque`
+              : `Quantidade em estoque: ${stock}`}
+          </span>
+        </div>
       </div>
       {/* Prices */}
       <div class="mt-4">

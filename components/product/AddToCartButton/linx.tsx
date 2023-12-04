@@ -8,7 +8,6 @@ export type Props = Omit<BtnProps, "onAddItem"> & {
 
 function AddToCartButton({ productGroupID, productID, eventParams }: Props) {
   const { addItem } = useCart();
-
   return (
     <Button
       eventParams={eventParams}
