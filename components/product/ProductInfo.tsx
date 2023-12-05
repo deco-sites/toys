@@ -71,8 +71,94 @@ function ProductInfo({ page, layout }: Props) {
     listPrice,
   });
 
+  let stock;
+
+  if (product) {
+    if (product.offers) {
+      stock = product.offers.offers[0].inventoryLevel.value;
+    }
+  }
+
   return (
     <div class="flex flex-col" id={id}>
+      <div class="bg-[#a79d9d] w-full h-[80px] fixed left-0 top-[85px] z-20">
+        <div class="grid grid-cols-9 grid-rows-none h-full items-center max-w-[60%] my-0 mx-auto">
+          <div class="col-[1/4]">
+            <h1>
+              <span class="font-medium text-xl capitalize" style="color:#fff">
+                {layout?.name === "concat"
+                  ? `${isVariantOf?.name} ${name}`
+                  : layout?.name === "productGroup"
+                  ? isVariantOf?.name
+                  : name}
+              </span>
+            </h1>
+          </div>
+          <div class="col-[5/7] flex flex-col text-right">
+            <span class="font-medium text-xl text-secondary" style="color:#fff">
+              Por: {formatPrice(price, offers?.priceCurrency)}
+            </span>
+            <span class="text-sm text-base-300" style="color:#fff">
+              ou {installments}
+            </span>
+          </div> 
+          <div class="mt-0 flex flex-col gap-4 col-[8/10]">
+            {availability === "https://schema.org/InStock"
+              ? (
+                <>
+                  {platform === "vtex" && (
+                    <>
+                      <AddToCartButtonVTEX
+                        eventParams={{ items: [eventItem] }}
+                        productID={productID}
+                        seller={seller}
+                      />
+                      <WishlistButton
+                        variant="full"
+                        productID={productID}
+                        productGroupID={productGroupID}
+                      />
+                    </>
+                  )}
+                  {platform === "wake" && (
+                    <AddToCartButtonWake
+                      eventParams={{ items: [eventItem] }}
+                      productID={productID}
+                    />
+                  )}
+                  {platform === "linx" && (
+                    <AddToCartButtonLinx
+                      eventParams={{ items: [eventItem] }}
+                      productID={productID}
+                      productGroupID={productGroupID}
+                    />
+                  )}
+                  {platform === "vnda" && (
+                    <AddToCartButtonVNDA
+                      eventParams={{ items: [eventItem] }}
+                      productID={productID}
+                      additionalProperty={additionalProperty}
+                    />
+                  )}
+                  {platform === "shopify" && (
+                    <AddToCartButtonShopify
+                      eventParams={{ items: [eventItem] }}
+                      productID={productID}
+                    />
+                  )}
+                  {platform === "nuvemshop" && (
+                    <AddToCartButtonNuvemshop
+                      productGroupID={productGroupID}
+                      eventParams={{ items: [eventItem] }}
+                      additionalProperty={additionalProperty}
+                    />
+                  )}
+                </>
+              )
+              : <OutOfStock productID={productID} />}
+          </div>
+        </div>
+      </div>
       <Breadcrumb itemListElement={breadcrumb.itemListElement} />
       {/* Code and name */}
       <div class="mt-4 sm:mt-8">
@@ -92,6 +178,15 @@ function ProductInfo({ page, layout }: Props) {
               : name}
           </span>
         </h1>
+        <div style="margin-top: 20px">
+          <span
+            style={stock && stock <= 10 ? "color: orange" : "color: current"}
+          >
+            {stock && stock <= 10
+              ? `Apenas ${stock} em estoque`
+              : `Quantidade em estoque: ${stock}`}
+          </span>
+        </div>
       </div>
       {/* Prices */}
       <div class="mt-4">

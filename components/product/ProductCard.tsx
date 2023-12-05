@@ -80,6 +80,12 @@ function ProductCard(
   const possibilities = useVariantPossibilities(hasVariant, product);
   const variants = Object.entries(Object.values(possibilities)[0] ?? {});
 
+  const discount = listPrice && price && listPrice > price
+    ? (listPrice - price)
+    : undefined;
+
+  // console.log('product: ', product.offers.offers[0]);
+
   const l = layout;
   const align =
     !l?.basics?.contentAlignment || l?.basics?.contentAlignment == "Left"
@@ -251,6 +257,11 @@ function ProductCard(
           )}
         {l?.hide?.allPrices ? "" : (
           <div class="flex flex-col gap-2">
+            <div>
+              <span class="text-[#b51313] font-bold">
+                Econimize: {discount && formatPrice(discount)}
+              </span>
+            </div>
             <div
               class={`flex flex-col gap-0 ${
                 l?.basics?.oldPriceSize === "Normal"
