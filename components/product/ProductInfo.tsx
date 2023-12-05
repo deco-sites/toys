@@ -16,6 +16,8 @@ import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductSelector from "./ProductVariantSelector.tsx";
+import ProductButtonFloatingHandleItem from "$store/components/ui/ProductButtonFloatingHandleItem.tsx";
+import ProductButtonFloatingPriceItem from "$store/components/ui/ProductButtonFloatingPriceItem.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -83,25 +85,8 @@ function ProductInfo({ page, layout }: Props) {
     <div class="flex flex-col" id={id}>
       <div class="bg-[#a79d9d] w-full h-[80px] fixed left-0 top-[85px] z-20">
         <div class="grid grid-cols-9 grid-rows-none h-full items-center max-w-[60%] my-0 mx-auto">
-          <div class="col-[1/4]">
-            <h1>
-              <span class="font-medium text-xl capitalize" style="color:#fff">
-                {layout?.name === "concat"
-                  ? `${isVariantOf?.name} ${name}`
-                  : layout?.name === "productGroup"
-                  ? isVariantOf?.name
-                  : name}
-              </span>
-            </h1>
-          </div>
-          <div class="col-[5/7] flex flex-col text-right">
-            <span class="font-medium text-xl text-secondary" style="color:#fff">
-              Por: {formatPrice(price, offers?.priceCurrency)}
-            </span>
-            <span class="text-sm text-base-300" style="color:#fff">
-              ou {installments}
-            </span>
-          </div> 
+          <ProductButtonFloatingHandleItem layout={layout} product={product} />
+          <ProductButtonFloatingPriceItem product={product} />
           <div class="mt-0 flex flex-col gap-4 col-[8/10]">
             {availability === "https://schema.org/InStock"
               ? (
