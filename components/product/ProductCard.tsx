@@ -258,7 +258,7 @@ function ProductCard(
         {l?.hide?.allPrices ? "" : (
           <div class="flex flex-col gap-2">
             <div>
-              <span style="color: #b51313;font-weight: bold;">
+              <span class="text-[#b51313] font-bold">
                 Econimize: {discount && formatPrice(discount)}
               </span>
             </div>

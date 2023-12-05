@@ -81,9 +81,9 @@ function ProductInfo({ page, layout }: Props) {
 
   return (
     <div class="flex flex-col" id={id}>
-      <div style="background: #a79d9d; width: 100%; height: 80px; position: fixed; left: 0;top: 85px;z-index:9">
-        <div style="display: grid;grid-template-columns: repeat(9, 1fr);grid-template-rows: auto;align-items: center;height: 100%;max-width: 60%;margin:0 auto">
-          <div style="grid-column: 1/4;">
+      <div class="bg-[#a79d9d] w-full h-[80px] fixed left-0 top-[85px] z-20">
+        <div class="grid grid-cols-9 grid-rows-none h-full items-center max-w-[60%] my-0 mx-auto">
+          <div class="col-[1/4]">
             <h1>
               <span class="font-medium text-xl capitalize" style="color:#fff">
                 {layout?.name === "concat"
@@ -94,15 +94,15 @@ function ProductInfo({ page, layout }: Props) {
               </span>
             </h1>
           </div>
-          <div style="grid-column: 5/7; display:flex;flex-direction: column;text-align:right">
+          <div class="col-[5/7] flex flex-col text-right">
             <span class="font-medium text-xl text-secondary" style="color:#fff">
               Por: {formatPrice(price, offers?.priceCurrency)}
             </span>
             <span class="text-sm text-base-300" style="color:#fff">
               ou {installments}
             </span>
-          </div>
-          <div style="grid-column:8/10;" class="mt-0 flex flex-col gap-4">
+          </div> 
+          <div class="mt-0 flex flex-col gap-4 col-[8/10]">
             {availability === "https://schema.org/InStock"
               ? (
                 <>
