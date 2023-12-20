@@ -11,11 +11,14 @@ function ProductButtonFloatingPriceItem({ product }: Props) {
   const { price = 0, installments } = useOffer(offers);
   return (
     <>
-      <div class="col-[5/7] flex flex-col text-right">
-        <span class="font-medium text-xl text-secondary" style="color:#fff">
+      <div class="col-[5/7] flex flex-col text-right price-floating">
+        <span
+          class="font-medium text-xl text-secondary span-floating"
+          style="color:#fff"
+        >
           Por: {formatPrice(price, offers?.priceCurrency)}
         </span>
-        <span class="text-sm text-base-300" style="color:#fff">
+        <span class="text-sm text-base-300 span-floating" style="color:#fff">
           ou {installments}
         </span>
       </div>

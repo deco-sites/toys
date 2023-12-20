@@ -18,7 +18,6 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 import ProductSelector from "./ProductVariantSelector.tsx";
 import ProductButtonFloatingHandleItem from "$store/components/ui/ProductButtonFloatingHandleItem.tsx";
 import ProductButtonFloatingPriceItem from "$store/components/ui/ProductButtonFloatingPriceItem.tsx";
-
 interface Props {
   page: ProductDetailsPage | null;
   layout: {
@@ -83,11 +82,11 @@ function ProductInfo({ page, layout }: Props) {
 
   return (
     <div class="flex flex-col" id={id}>
-      <div class="bg-[#a79d9d] w-full h-[80px] fixed left-0 top-[85px] z-20">
-        <div class="grid grid-cols-9 grid-rows-none h-full items-center max-w-[60%] my-0 mx-auto">
+      <div class="bg-[#a79d9d] w-full h-[80px] fixed left-0 top-[85px] z-20 container-floating is-hidden">
+        <div class="grid grid-cols-9 grid-rows-none h-full items-center max-w-[60%] item-floating my-0 mx-auto">
           <ProductButtonFloatingHandleItem layout={layout} product={product} />
           <ProductButtonFloatingPriceItem product={product} />
-          <div class="mt-0 flex flex-col gap-4 col-[8/10]">
+          <div class="mt-0 flex flex-col gap-4 col-[8/10] btn-floating is-hidden">
             {availability === "https://schema.org/InStock"
               ? (
                 <>
