@@ -16,7 +16,7 @@ function ProductButtonFloatingNameItem({ layout, product }: Props) {
     ScrollButtonFloating();
   });
 
-  return ( 
+  return (
     <>
       <div class="col-[1/4]">
         <h1>
