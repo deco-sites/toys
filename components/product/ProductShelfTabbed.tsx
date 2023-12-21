@@ -80,7 +80,7 @@ function TabbedProductShelf({
           {products?.map((product, index) => (
             <Slider.Item
               index={index}
-              class="carousel-item w-[270px] sm:w-[285px] first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-2.5"
+              class="carousel-item w-[270px] sm:w-[24%] first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-2.5"
             >
               <ProductCard
                 product={product}
