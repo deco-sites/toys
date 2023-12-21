@@ -74,13 +74,13 @@ function TabbedProductShelf({
 
       <div
         id={id}
-        class="container grid grid-cols-[48px_1fr_48px] px-0 sm:px-5"
+        class="container grid grid-cols-[48px_1fr_48px] px-0 sm:px-5 max-w-[85%]"
       >
-        <Slider class="carousel carousel-center sm:carousel-end gap-6 col-span-full row-start-2 row-end-5">
+        <Slider class="best-sellers carousel carousel-center sm:carousel-end gap-6 col-span-full row-start-2 row-end-5 max-w-[95%] mx-auto my-0 gap-x-2.5">
           {products?.map((product, index) => (
             <Slider.Item
               index={index}
-              class="carousel-item w-[270px] sm:w-[292px] first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-0"
+              class="carousel-item w-[270px] sm:w-[285px] first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-2.5"
             >
               <ProductCard
                 product={product}
@@ -95,12 +95,12 @@ function TabbedProductShelf({
 
         <>
           <div class="hidden relative sm:block z-10 col-start-1 row-start-3">
-            <Slider.PrevButton class="btn btn-circle btn-outline absolute right-1/2 bg-base-100">
+            <Slider.PrevButton class="btn btn-circle btn-outline absolute right-0 bg-base-100">
               <Icon size={24} id="ChevronLeft" strokeWidth={3} />
             </Slider.PrevButton>
           </div>
           <div class="hidden relative sm:block z-10 col-start-3 row-start-3">
-            <Slider.NextButton class="btn btn-circle btn-outline absolute left-1/2 bg-base-100">
+            <Slider.NextButton class="btn btn-circle btn-outline absolute left-0 bg-base-100">
               <Icon size={24} id="ChevronRight" strokeWidth={3} />
             </Slider.NextButton>
           </div>
